@@ -1,4 +1,4 @@
-var N
+fuvar N
 var A
 
 function setup() {
@@ -10,4 +10,8 @@ function setup() {
 
 function draw() {
   background(255);
+  baum();
+}
+baum=funktion(){
+line(0,0,200,200);
 }
