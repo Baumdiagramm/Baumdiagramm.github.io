@@ -1,4 +1,4 @@
-fuvar N
+var N
 var A
 
 function setup() {
