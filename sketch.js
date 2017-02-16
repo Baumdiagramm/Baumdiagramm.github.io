@@ -20,9 +20,10 @@ function setup() {
 
 function draw() {
     background(255);
-    translate(width / 2, height);
+    translate(width / 2, height-10);
     deg = 0;
-    amount = PI / a.value();
+    amount =.5;// PI / a.value();
+    first=true;
     baum(120);
 }
 
@@ -31,10 +32,10 @@ function baum(len) {
 
     //float sw = map(len,2,120,1,10);
     //strokeWeight(sw);
-    strokeWeight(2);
+    strokeWeight(1);
 
     if (!first) {
-        stroke(col);
+        stroke(random(255));
         col-=10
         line(0, 0, 0, -len);
         // Move to the end of that line
@@ -62,5 +63,6 @@ function baum(len) {
     }
 }
 function degaument() {
-  deg+=amount;
+  deg*=-1//+=amount;
 }
+
