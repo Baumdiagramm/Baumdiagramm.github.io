@@ -21,10 +21,11 @@ function setup() {
 function draw() {
     background(255);
     translate(width / 2, height-10);
-    deg = 0;
+    //rotate(PI);
+    deg =PI/a.value();
     amount =.5;// PI / a.value();
     first=true;
-    baum(120);
+    baum(120*3);
 }
 
 function baum(len) {
@@ -35,7 +36,7 @@ function baum(len) {
     strokeWeight(1);
 
     if (!first) {
-        stroke(random(255));
+        //stroke(random(255),random(255),random(255),random(255));
         col-=10
         line(0, 0, 0, -len);
         // Move to the end of that line
@@ -46,23 +47,28 @@ function baum(len) {
     len *= 0.5;
     // All recursive functions must have an exit condition!!!!
     // Here, ours is when the length of the branch is 2 pixels or less
-    if (len > 2) {
-        for (var i = 0; i < a.value(); i++  && degaument() ) {
+    if (len > 30) {
+
+      //rotate(HALF_PI/3);
+      //  for (var i = 0; i < 2; i++  && degaument() ) {
+          for (var j = 1-(deg/PI)*1; j >=-1; j-=(deg/PI)*2) {
+            if(j>0){stroke(255,0,0);}else{stroke(0,0,255)}
+            console.log(j);
             push(); // Save the current state of transformation (i.e. where are we now)
-            rotate(deg); // Rotate by deg
+            rotate(deg*j); // Rotate by deg
             baum(len); // Ok, now call myself to draw two new branches!!
             pop();
-        }
-        // Whenever we get back here, we "pop" in order to restore the previous matrix state
+          }
+      //  }
+              // Whenever we get back here, we "pop" in order to restore the previous matrix state
 
         // Repeat the same thing, only branch off to the "left" this time!
-        // push();
-        // rotate(-deg);
-        // baum(len);
-        // pop();
+        //   push();
+        //   rotate(-deg);
+        //  baum(len);
+        //   pop();
     }
 }
 function degaument() {
   deg*=-1//+=amount;
 }
-
