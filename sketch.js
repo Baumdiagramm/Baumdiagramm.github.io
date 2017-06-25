@@ -3,7 +3,7 @@ var a;//branches
 var STEP_SIZE;
 var STROKE;
 function setup() {
-    createCanvas(800, 400);
+    createCanvas(1600, 800);
     frameRate(3);
 
     N = createInput();//depth
@@ -19,14 +19,14 @@ function setup() {
     createP("Branches").position(a.position().x+a.size().width+5,a.position().y-a.size().height/1.5);
 
     STEP_SIZE = -height/N.value();
-    STROKE = 4;
+    STROKE = 2;
 }
 
 function draw() {
     STEP_SIZE = height/N.value()-(1+STROKE);
     background(255);
     for (var i = 0; i < width; i+=width/ pow(2, floor(N.value())+1) ) {
-      line(i,0,i,height);
+      //line(i,0,i,height);
     }
     translate(width/2, STROKE);
     strokeWeight(STROKE);
@@ -41,33 +41,20 @@ function baum(level,stepSize,branches,depth) {
     //strokeWeight(sw);
 
     if(level<=depth){
-      line(0,0,(width/(2*(level))-(width/2)/(2*(level))),stepSize);
+      console.log(width/pow(2,floor(level)+1));
+      line(0,0,(width/pow(2,floor(level)+1)),stepSize);
       push();
-      translate((width/(2*(level))-(width/2)/(2*(level))),stepSize);
+      translate((width/pow(2,floor(level)+1)),stepSize);
       baum(level+1,stepSize,branches,depth);
       pop();
 
-      line(0,0,-(width/(2*(level))-(width/2)/(2*(level))),stepSize);
+      line(0,0,-(width/pow(2,floor(level)+1)),stepSize);
       push();
-      translate(-(width/(2*(level))-(width/2)/(2*(level))),stepSize);
+      translate(-(width/pow(2,floor(level)+1)),stepSize);
       baum(level+1,stepSize,branches,depth);
       pop();
-
-      // line(0,0,-(width/(level+1)-(width/2)/(level+1)),stepSize);
-      // push();
-      // translate(-(width/(level+1)-(width/2)/(level+1)),stepSize);
-      // baum(level+1,stepSize,branches,depth);
-      // pop();
     }
-    // if (!first) {
-    //     //stroke(random(255),random(255),random(255),random(255));
-    //     line(0, 0, 0, -len);
-    //     // Move to the end of that line
-    //     translate(0, -len);
-    // }
-    //first = false;
 
-    //len *= decrease;//
     // All recursive functions must have an exit condition!!!!
     // Here, ours is when the length of the branch is 2 pixels or less
     // if (lev > 45){//limit) {
