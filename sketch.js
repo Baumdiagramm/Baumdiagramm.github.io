@@ -1,47 +1,39 @@
 var N;//depth
+var tN;//paragraph depth
 var a;//branches
+var ta;//paragraph branches
 var STEP_SIZE;
 var STROKE;
 function setup() {
-    createCanvas(1600, 800);
+    createCanvas(window.innerWidth, window.innerHeight);
     frameRate(3);
 
     N = createInput();//depth
-    N.position(width, 5);
+    N.position(width/4*3, 100);
     N.size(10, 15);
     N.value(2);
-    createP("Depth").position(N.position().x+N.size().width+5,N.position().y-N.size().height/1.5);
+    tN = createP("Depth").position(N.position().x+N.size().width+5,N.position().y-N.size().height/1.5);
 
     a = createInput();//branches
-    a.position(width, N.position().y+N.size().height+5);
+    a.position(width/4*3, N.position().y+N.size().height+5);
     a.size(10, 15);
     a.value(2);
-    createP("Branches").position(a.position().x+a.size().width+5,a.position().y-a.size().height/1.5);
+    ta = createP("Branches").position(a.position().x+a.size().width+5,a.position().y-a.size().height/1.5);
 
-    STEP_SIZE = -height/N.value();
     STROKE = 2;
+    STEP_SIZE = height/N.value()-(1+STROKE);
 }
 
 function draw() {
     STEP_SIZE = height/N.value()-(1+STROKE);
     background(255);
-    for (var i = 0; i < width; i+=width/ pow(2, floor(N.value())+1) ) {
-      //line(i,0,i,height);
-    }
-    translate(width/2, STROKE);
     strokeWeight(STROKE);
-    if(N.value()<10)baum(1,STEP_SIZE,a.value(),N.value());
-    //console.log(mouseX,mouseY);
+    translate(width/2, STROKE);
+    baum(1,STEP_SIZE,a.value(),N.value());
 }
 
 function baum(level,stepSize,branches,depth) {
-    // Each branch will be 2/3rds the size of the previous one
-
-    //float sw = map(le*n,2,120,1,10);
-    //strokeWeight(sw);
-
     if(level<=depth){
-      console.log(width/pow(2,floor(level)+1));
       line(0,0,(width/pow(2,floor(level)+1)),stepSize);
       push();
       translate((width/pow(2,floor(level)+1)),stepSize);
@@ -77,4 +69,12 @@ function baum(level,stepSize,branches,depth) {
     //     //  baum(len);
     //     //   pop();
     //}
+}
+function windowResized() {
+	createCanvas(window.innerWidth, window.innerHeight);
+  N.position(width/4*3, 100);
+  tN.position(N.position().x+N.size().width+5,N.position().y-N.size().height/1.5);
+  a.position(width/4*3, N.position().y+N.size().height+5);
+  ta.position(a.position().x+a.size().width+5,a.position().y-a.size().height/1.5);
+  console.log(window.outerWidth+"X"+window.outerHeight);
 }
