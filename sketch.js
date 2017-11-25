@@ -15,11 +15,12 @@ function setup() {
   N.value(2);
   tN = createP("Depth").position(N.position().x+N.size().width+5,N.position().y-N.size().height/1);
 
-  a = createInput();//branches
-  a.position(width/4*3, N.position().y+N.size().height+5);
-  a.size(20, 30);
-  a.value(2);
-  ta = createP("Branches").position(a.position().x+a.size().width+5,a.position().y-a.size().height/1);
+   a = createInput();//branches
+   a.position(width/4*3, N.position().y+N.size().height+5);
+   a.size(0,0);
+   // a.size(20, 30);
+  // a.value(2);
+  // ta = createP("Branches").position(a.position().x+a.size().width+5,a.position().y-a.size().height/1);
 
   pic = createButton('save Picture');
   pic.position(width/4*3, a.position().y+a.size().height+5);
@@ -51,29 +52,6 @@ function baum(level,stepSize,branches,depth) {
     baum(level+1,stepSize,branches,depth);
     pop();
   }
-
-  // All recursive functions must have an exit condition!!!!
-  // Here, ours is when the length of the branch is 2 pixels or less
-  // if (lev > 45){//limit) {
-  //
-  //   //rotate(HALF_PI/3);
-  //   //  for (var i = 0; i < 2; i++  && degaument() ) {
-  //       for (var j = 1-(deg/PI)*1; j >=-1; j-=(deg/PI)*2) {
-  //         if(j>0){stroke(255,0,0);}else{stroke(0,0,255)}
-  //         push(); // Save the current state of transformation (i.e. where are we now)
-  //         rotate(deg*j); // Rotate by deg
-  //         baum(len); // Ok, now call myself to draw two new branches!!
-  //         pop();
-  //       }
-  //   //  }
-  //           // Whenever we get back here, we "pop" in order to restore the previous matrix state
-  //
-  //     // Repeat the same thing, only branch off to the "left" this time!
-  //     //   push();
-  //     //   rotate(-deg);
-  //     //  baum(len);
-  //     //   pop();
-  //}
 }
 function windowResized() {
 	createCanvas(window.innerWidth, window.innerHeight);
